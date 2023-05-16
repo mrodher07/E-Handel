@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "824003901384",
+    "project_id": "e-handel-8838a",
+    "storage_bucket": "e-handel-8838a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824003901384:android:5f2f7736d87f42edd132fd",
+        "android_client_info": {
+          "package_name": "com.example.eHandel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824003901384-jbmqnqkvjal5h37i45ruavdse8oo1i5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eHandel",
+            "certificate_hash": "09bacf4b4509ceee929a5c6929ff9ca75680052a"
+          }
+        },
+        {
+          "client_id": "824003901384-9il7dkkmfj3rbitk3qq4leverks3or8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWNIG1jqJ404JfHDrFCTkeCTBBHA51ENs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824003901384-9il7dkkmfj3rbitk3qq4leverks3or8h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

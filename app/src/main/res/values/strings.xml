@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">E-Handel</string>
+    <string name="loginRegisterUsername">Nombre de usuario</string>
+    <string name="loginRegisterPassword">Contraseña</string>
+    <string name="forgotPassWordText">¿Has olvidado la contraseña?</string>
+    <string name="loginButtonText">Iniciar Sesión</string>
+    <string name="NotRegisterdText">¿No tienes cuenta aún? Registrate</string>
+    <string name="IsRegisteredText">¿Ya estas registrado? Inicia Sesion</string>
+    <string name="loginRegisterEmail">Correo</string>
+    <string name="loginRegisterCountry">País</string>
+    <string name="loginRegisterDirection">Direccion</string>
+    <string name="loginRegisterPhone">Telefono</string>
+    <string name="RegisterButtonText">Registrarse</string>
+</resources>
