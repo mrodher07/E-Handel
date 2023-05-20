@@ -41,6 +41,12 @@ class RegisterActivity : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java))
     }
 
+    fun intentSuccessRegister(){
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     fun register(email: String, username: String, country: String, direction: String, phone: String, password: String){
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(
             email, password
@@ -48,6 +54,9 @@ class RegisterActivity : AppCompatActivity() {
             if(it.isSuccessful){
                 println("r "+email)
                 writeNewUser(email, username, country, direction, phone, password)
+                intentSuccessRegister()
+            }else{
+                Toast.makeText(this, "Los datos introducidos son erroneos compruebalo de nuevo.", Toast.LENGTH_SHORT).show()
             }
         }
     }

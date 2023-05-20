@@ -9,10 +9,13 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
 
         binding.tvNotRegistered.setOnClickListener {
             intentRegistro()
@@ -22,6 +25,15 @@ class MainActivity : AppCompatActivity() {
             var email = binding.loginEmailInput.text.toString().trim()
             var password = binding.loginPasswordInput.text.toString().trim()
             iniciarSesion(email, password)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(auth.currentUser != null){
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -42,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 email, password
             ).addOnCompleteListener {
                 if(it.isSuccessful){
-                    abrirPerfil();
+                    iniciarSesion();
                 }else{
                     Toast.makeText(this, "Algun dato se ha introducido de forma incorrecta", Toast.LENGTH_SHORT).show()
                 }
@@ -50,8 +62,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun abrirPerfil(){
-        Toast.makeText(this, "Se ha iniciado sesión", Toast.LENGTH_SHORT).show()
+    fun iniciarSesion(){
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
