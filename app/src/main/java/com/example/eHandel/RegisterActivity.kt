@@ -54,7 +54,6 @@ class RegisterActivity : AppCompatActivity() {
             if(it.isSuccessful){
                 println("r "+email)
                 writeNewUser(email, username, country, direction, phone, password)
-                intentSuccessRegister()
             }else{
                 Toast.makeText(this, "Los datos introducidos son erroneos compruebalo de nuevo.", Toast.LENGTH_SHORT).show()
             }
@@ -74,7 +73,8 @@ class RegisterActivity : AppCompatActivity() {
 
         db.collection("user").document(email)
             .set(data)
-            .addOnSuccessListener { Log.d(ContentValues.TAG, "DocumentSnapshot successfully written!") }
+            .addOnSuccessListener { Log.d(ContentValues.TAG, "DocumentSnapshot successfully written!")
+                intentSuccessRegister()}
             .addOnFailureListener{ e -> println(e.message)}
     }
 }

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/welcome">
+    android:background="@drawable/login">
+
 
     <ImageView
         android:id="@+id/login_app_logo"
@@ -22,9 +23,9 @@
         android:layout_below="@+id/login_app_logo"
         android:padding="20dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterEmail"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -42,7 +43,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterPassword"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -59,6 +60,37 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutImOrNotAdmin"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_password_input"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvImAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ImAdmin"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/tvImNotAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ImNotAdmin"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvForgotPassword"

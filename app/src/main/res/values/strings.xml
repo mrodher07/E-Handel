@@ -4,6 +4,7 @@
     <string name="loginRegisterPassword">Contraseña</string>
     <string name="forgotPassWordText">¿Has olvidado la contraseña?</string>
     <string name="loginButtonText">Iniciar Sesión</string>
+    <string name="loginAdminButtonText">Iniciar Sesión Admin</string>
     <string name="NotRegisterdText">¿No tienes cuenta aún? Registrate</string>
     <string name="IsRegisteredText">¿Ya estas registrado? Inicia Sesion</string>
     <string name="loginRegisterEmail">Correo</string>
@@ -11,4 +12,7 @@
     <string name="loginRegisterDirection">Direccion</string>
     <string name="loginRegisterPhone">Telefono</string>
     <string name="RegisterButtonText">Registrarse</string>
+    <string name="ImAdmin">¿Soy Admin?</string>
+    <string name="ImNotAdmin">¿No soy Admin?</string>
+
 </resources>

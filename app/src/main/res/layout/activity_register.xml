@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/welcome">
+    android:background="@drawable/login">
 
     <ImageView
         android:id="@+id/register_app_logo"
@@ -24,7 +24,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterEmail"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -42,7 +42,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterUsername"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -59,7 +59,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterCountry"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -76,7 +76,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterDirection"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -93,7 +93,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterPhone"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -110,7 +110,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="#9E000000"
+        android:background="#BA000000"
         android:hint="@string/loginRegisterPassword"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -140,7 +140,7 @@
         android:orientation="horizontal"
         android:layout_below="@+id/registerButton"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:layout_marginRight="20dp">
 
         <TextView
