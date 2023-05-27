@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".adminActivities.AdminCategoryActivity"
+    android:background="@color/RedCake">
+
+    <TextView
+        android:id="@+id/tvAddNewProductAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryColor"
+        android:text="Admin Name"
+        android:textSize="35sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutAdminCategorys1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvAddNewProductAdmin"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutAddNewClothes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/addClothesIcon"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/clothesicon" />
+
+            <TextView
+                android:id="@+id/tvAddClothesAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tvAddClothesAdmin"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/LinearLayoutAddNewFood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/addFoodIcon"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/foodicon" />
+
+            <TextView
+                android:id="@+id/tvAddFoodAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tvAddFoodAdmin"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutAdminCategorys2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/LinearLayoutAdminCategorys1"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutAddNewFurniture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/addFurnitureIcon"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/furnitureicon" />
+
+            <TextView
+                android:id="@+id/tvAddFurnitureAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tvAddFurnitureAdmin"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/LinearLayoutAddNewElectronics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/addElectronicsIcon"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/electronicsicon" />
+
+            <TextView
+                android:id="@+id/tvAddElectronicsAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tvAddElectronicsAdmin"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.eHandel.adminActivities.AdminActivity
+import com.example.eHandel.adminActivities.AdminAddNewProductActivity
 import com.example.eHandel.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -100,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun iniciarSesionAdmin(){
-        val intent = Intent(this, AdminAddNewProductActivity::class.java)
+        val intent = Intent(this, AdminActivity::class.java)
         startActivity(intent)
         finish()
     }

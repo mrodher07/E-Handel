@@ -14,5 +14,13 @@
     <string name="RegisterButtonText">Registrarse</string>
     <string name="ImAdmin">¿Soy Admin?</string>
     <string name="ImNotAdmin">¿No soy Admin?</string>
+    <string name="tvNuevoProductoAdmin">Añadir nuevo producto</string>
+    <string name="tvAddProductAdmin">Añadir Producto</string>
+    <string name="tvDeleteProduct">Borrar Producto</string>
+    <string name="addNewAdmin">Añadir nuevo Admin</string>
+    <string name="tvAddClothesAdmin">Añadir Ropa</string>
+    <string name="tvAddFoodAdmin">Añadir Comida</string>
+    <string name="tvAddFurnitureAdmin">Añadir Muebles</string>
+    <string name="tvAddElectronicsAdmin">Añadir Electrónica</string>
 
 </resources>

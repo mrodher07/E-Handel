@@ -15,7 +15,21 @@
         android:theme="@style/Theme.EHandel"
         tools:targetApi="31">
         <activity
-            android:name=".AdminAddNewProductActivity"
+            android:name=".adminActivities.AdminActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".adminActivities.AdminCategoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".adminActivities.AdminAddNewProductActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
