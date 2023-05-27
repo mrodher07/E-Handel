@@ -22,5 +22,12 @@
     <string name="tvAddFoodAdmin">Añadir Comida</string>
     <string name="tvAddFurnitureAdmin">Añadir Muebles</string>
     <string name="tvAddElectronicsAdmin">Añadir Electrónica</string>
+    <string name="tvAddNewProductActivity">Añadir nuevo producto</string>
+    <string name="tvAddNewProductType">Tipo de Producto:</string>
+    <string name="etAddNewProductName">Nombre del producto</string>
+    <string name="etAddNewProductVendor">Vendedor</string>
+    <string name="etAddNewProductPrice">Precio</string>
+    <string name="etAddNewProductQuantity">Cantidad</string>
+    <string name="btnAddNewProductText">Añadir Nuevo Producto</string>
 
 </resources>
