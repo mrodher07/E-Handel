@@ -37,7 +37,7 @@
         android:id="@+id/ivNewProductPhoto"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/noImageIcon"
+        android:src="@drawable/noimageicon"
         android:layout_below="@id/tvAddNewProductType"
         android:layout_marginTop="10dp"/>
 
