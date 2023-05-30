@@ -140,7 +140,8 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                     val data = hashMapOf(
                         "name" to name,
                         "type" to tipo,
-                        "image" to uri.toString(), "vendor" to vendor,
+                        "image" to uri.toString(),
+                        "vendor" to vendor,
                         "price" to price,
                         "quantity" to quantity,
                     )
@@ -183,7 +184,8 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                     val data = hashMapOf(
                         "name" to name,
                         "type" to tipo,
-                        "image" to uri.toString(), "vendor" to vendor,
+                        "image" to uri.toString(),
+                        "vendor" to vendor,
                         "price" to price,
                         "quantity" to quantity,
                     )
@@ -219,6 +221,44 @@ class AdminAddNewProductActivity : AppCompatActivity() {
             }.addOnCanceledListener {
                 println("Se ha cancelado")
             }
+        }else if (imageUri == null && imageByteArray == null){
+            val firestoreDB = FirebaseFirestore.getInstance()
+            val db = Firebase.firestore
+
+            val data = hashMapOf(
+                "name" to name,
+                "type" to tipo,
+                "image" to "https://firebasestorage.googleapis.com/v0/b/e-handel-8838a.appspot.com/o/photos%2Fimagenotfound.png?alt=media&token=b98faff4-7c09-46ae-9632-dd46730870d3",
+                "vendor" to vendor,
+                "price" to price,
+                "quantity" to quantity,
+            )
+
+            firestoreDB.collection("products")
+                .document(name)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val document = task.result
+                        if (document.exists()) {
+                            Toast.makeText(
+                                this,
+                                "El producto creado ya existe",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            db.collection("products").document(name)
+                                .set(data)
+                                .addOnSuccessListener {
+                                    Log.d(
+                                        ContentValues.TAG,
+                                        "DocumentSnapshot successfully written!"
+                                    )
+                                }
+                                .addOnFailureListener { e -> println(e.message) }
+                        }
+                    }
+                }
         }
     }
 }
