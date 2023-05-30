@@ -115,15 +115,8 @@ class AdminAddNewProductActivity : AppCompatActivity() {
         var byteArrayOutputStream = ByteArrayOutputStream()
         var byteArray : ByteArray? = null
         try {
-
             var img = bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
             byteArray = byteArrayOutputStream.toByteArray()
-
-            /*val file = File(context.filesDir, "Image_${System.currentTimeMillis()}.jpg")
-            fileOutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-            fileOutputStream.flush()
-            imageUri = Uri.fromFile(file)*/
         }catch (e: IOException){
             e.printStackTrace()
         }finally {
@@ -136,98 +129,96 @@ class AdminAddNewProductActivity : AppCompatActivity() {
         return byteArray
     }
 
-    private fun uploadPhotoToFirebaseStorage(){
-        if(imageUri != null){
+    private fun addNewProduct(name: String, vendor: String, price: Double, quantity: Number) {
+        if (imageUri != null) {
             val storageRef = storage.reference.child("photos")
-            val imageRef = storageRef.child("imagen")
+            val imageRef = storageRef.child("Image_${System.currentTimeMillis()}.jpg")
             imageRef.putFile(imageUri!!).addOnSuccessListener {
                 imageRef.downloadUrl.addOnSuccessListener { uri ->
-                    downloadUrl = uri.toString()
+                    val firestoreDB = FirebaseFirestore.getInstance()
+                    val db = Firebase.firestore
+                    val data = hashMapOf(
+                        "name" to name,
+                        "type" to tipo,
+                        "image" to uri.toString(), "vendor" to vendor,
+                        "price" to price,
+                        "quantity" to quantity,
+                    )
+                    firestoreDB.collection("products")
+                        .document(name)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val document = task.result
+                                if (document.exists()) {
+                                    Toast.makeText(
+                                        this,
+                                        "El producto creado ya existe",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    db.collection("products").document(name)
+                                        .set(data)
+                                        .addOnSuccessListener {
+                                            Log.d(
+                                                ContentValues.TAG,
+                                                "DocumentSnapshot successfully written!"
+                                            )
+                                        }
+                                        .addOnFailureListener { e -> println(e.message) }
+                                }
+                            }
+                        }
                 }
             }
-
-
-            /*uploadTask.continueWithTask{ task ->
-                if(!task.isSuccessful){
-                    task.exception?.let {
-                        throw it
-                    }
-                }
-                imageRef.downloadUrl
-            }.addOnCompleteListener { task ->
-                if(task.isSuccessful) {
-                    downloadUrl = task.result.toString()
-                }else{
-
-                }
-            }*/
-        }else if (imageByteArray != null){
+        } else if (imageByteArray != null) {
             val storageRef = storage.reference.child("photos")
-            val imageRef = storageRef.child("imagenPrueba")
+            val imageRef = storageRef.child("Image_${System.currentTimeMillis()}.jpg")
             imageRef.putBytes(imageByteArray!!).addOnSuccessListener {
-                println("Ha entrado")
                 imageRef.downloadUrl.addOnSuccessListener { uri ->
-                    downloadUrl = uri.toString()
+                    println(uri.toString())
+                    val firestoreDB = FirebaseFirestore.getInstance()
+                    val db = Firebase.firestore
+
+                    val data = hashMapOf(
+                        "name" to name,
+                        "type" to tipo,
+                        "image" to uri.toString(), "vendor" to vendor,
+                        "price" to price,
+                        "quantity" to quantity,
+                    )
+
+                    firestoreDB.collection("products")
+                        .document(name)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val document = task.result
+                                if (document.exists()) {
+                                    Toast.makeText(
+                                        this,
+                                        "El producto creado ya existe",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    db.collection("products").document(name)
+                                        .set(data)
+                                        .addOnSuccessListener {
+                                            Log.d(
+                                                ContentValues.TAG,
+                                                "DocumentSnapshot successfully written!"
+                                            )
+                                        }
+                                        .addOnFailureListener { e -> println(e.message) }
+                                }
+                            }
+                        }
                 }
-            }.addOnFailureListener{
+            }.addOnFailureListener {
                 println("Ha dado fallo")
             }.addOnCanceledListener {
                 println("Se ha cancelado")
             }
         }
-    }
-
-    private fun addNewProduct(name: String, vendor: String, price: Double, quantity: Number){
-
-        val firestoreDB = FirebaseFirestore.getInstance()
-        val db = Firebase.firestore
-        if(imageUri != null){
-            val storageRef = storage.reference.child("photos")
-            val imageRef = storageRef.child("imagen")
-            imageRef.putFile(imageUri!!).addOnSuccessListener {
-                imageRef.downloadUrl.addOnSuccessListener { uri ->
-                    downloadUrl = uri.toString()
-                }
-            }
-        }else if (imageByteArray != null){
-            val storageRef = storage.reference.child("photos")
-            val imageRef = storageRef.child("imagenPrueba")
-            imageRef.putBytes(imageByteArray!!).addOnSuccessListener {
-                println("Ha entrado")
-                imageRef.downloadUrl.addOnSuccessListener { uri ->
-                    downloadUrl = uri.toString()
-                }
-            }.addOnFailureListener{
-                println("Ha dado fallo")
-            }.addOnCanceledListener {
-                println("Se ha cancelado")
-            }
-        }
-
-        val data = hashMapOf(
-            "name" to name,
-            "type" to tipo,
-            "image" to downloadUrl,
-            "vendor" to vendor,
-            "price" to price,
-            "quantity" to quantity,
-        )
-
-        firestoreDB.collection("products")
-            .document(name)
-            .get()
-            .addOnCompleteListener { task ->
-                if(task.isSuccessful){
-                    val document = task.result
-                    if (document.exists()){
-                        Toast.makeText(this, "El producto creado ya existe", Toast.LENGTH_SHORT).show()
-                    }else{
-                        db.collection("products").document(name)
-                            .set(data)
-                            .addOnSuccessListener { Log.d(ContentValues.TAG, "DocumentSnapshot successfully written!")}
-                            .addOnFailureListener{ e -> println(e.message)}
-                    }
-                }
-            }
     }
 }

@@ -69,6 +69,7 @@ class RegisterActivity : AppCompatActivity() {
             "direction" to direction,
             "phone" to phone,
             "password" to password,
+            "isVendor" to false,
         )
 
         db.collection("user").document(email)
