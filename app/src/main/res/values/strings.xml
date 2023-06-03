@@ -49,5 +49,13 @@
     <string name="menu_logout">Cerrar Sesión</string>
     <string name="menu_sellProduct">Vender Producto</string>
     <string name="homeTitle">Inicio</string>
+    <string name="toolbar_settings_close_text">Cerrar</string>
+    <string name="toolbar_settings_update_text">Actualizar</string>
+    <string name="phone_number_hint_etSettingsPhoneNumber">Phone Number...</string>
+    <string name="phone_number_hint_etSettingsDirection">Address...</string>
+    <string name="phone_number_hint_etSettingsCountry">Country...</string>
+    <string name="phone_number_hint_etSettingsPassword">Password...</string>
+    <string name="btnSettingsIsVendorFalse">Pulsa aqui para ser vendedor</string>
+    <string name="btnSettingsIsVendorTrue">Pulsa aqui para no ser vendedor</string>
 
 </resources>

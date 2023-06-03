@@ -11,4 +11,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grayCard">#CFCFCF</color>
+    <color name="green">#0CB10F</color>
 </resources>

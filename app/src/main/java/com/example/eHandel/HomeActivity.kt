@@ -30,7 +30,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var auth: FirebaseAuth
     val db = Firebase.firestore
-    val firestore = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -68,7 +67,7 @@ class HomeActivity : AppCompatActivity() {
 
                 }
                 R.id.nav_settings -> {
-
+                    startActivity(Intent(this, SettingsActivity::class.java))
                 }
                 R.id.nav_logout -> {
                     auth = FirebaseAuth.getInstance()
