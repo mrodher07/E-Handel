@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    app:cardElevation="15dp"
+    android:outlineSpotShadowColor="@color/black"
+    android:background="@color/RedCake"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/cardProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primaryColor"
+            android:layout_marginBottom="5dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/grayCard"
+            android:layout_above="@+id/cardProductImage"
+            android:layout_marginBottom="3dp"/>
+
+        <ImageView
+            android:id="@+id/cardProductImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/cardProductName"
+            android:scaleType="centerCrop"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/grayCard"
+            android:layout_above="@+id/cardProductVendor"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:id="@+id/cardProductVendor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardProductImage"
+            android:text="Product Vendor"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/secondaryColor"
+            />
+
+        <TextView
+            android:id="@+id/cardProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardProductVendor"
+            android:textAlignment="textEnd"
+            android:text="Price"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/secondaryColor"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            />
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

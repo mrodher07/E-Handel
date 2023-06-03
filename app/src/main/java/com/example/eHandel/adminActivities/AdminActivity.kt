@@ -3,10 +3,6 @@ package com.example.eHandel.adminActivities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.example.eHandel.HomeActivity
-import com.example.eHandel.R
-import com.example.eHandel.databinding.ActivityAdminAddNewProductBinding
 import com.example.eHandel.databinding.ActivityAdminBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
