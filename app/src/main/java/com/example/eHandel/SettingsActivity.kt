@@ -76,7 +76,8 @@ class SettingsActivity : AppCompatActivity() {
     fun updateUserData(){
 
         auth = FirebaseAuth.getInstance()
-        var email = auth.currentUser?.email
+        var currentUser = auth.currentUser
+        var email = currentUser?.email
         val users = db.collection("user")
         val loggedUser = users.document(email.toString())
         loggedUser.get()
@@ -95,8 +96,15 @@ class SettingsActivity : AppCompatActivity() {
 
                     loggedUser.update(data as Map<String, Any>)
                         .addOnSuccessListener { Log.d(ContentValues.TAG, "DocumentSnapshot successfully written!")
-                            startActivity(Intent(this, HomeActivity::class.java))
-                            finish()
+
+                            if (currentUser != null) {
+                                currentUser.updatePassword(binding.etSettingsPassword.text.toString())
+                                    .addOnSuccessListener {
+                                        startActivity(Intent(this, HomeActivity::class.java))
+                                        finish()
+                                    }
+                                    .addOnFailureListener{ e -> println(e.message)}
+                            }
                         }
                         .addOnFailureListener{ e -> println(e.message)}
                 }
