@@ -57,5 +57,13 @@
     <string name="phone_number_hint_etSettingsPassword">Password...</string>
     <string name="btnSettingsIsVendorFalse">Pulsa aqui para ser vendedor</string>
     <string name="btnSettingsIsVendorTrue">Pulsa aqui para no ser vendedor</string>
+    <string name="productDetailActivityCantidad">Cantidad:</string>
+    <string name="productDetailActivityType">Tipo:</string>
+    <string name="productDetailActivityVendor">Vendedor:</string>
+    <string name="productDetailActivityPrice">Precio:</string>
+    <string name="btnAddToCart">Añadir al Carrito</string>
+    <string name="tvTotalPriceCart">Precio Total:</string>
+    <string name="buttonNextCart">Siguiente</string>
+    <string name="tvNoProductsInCart">No hay ningún producto en el carrito</string>
 
 </resources>

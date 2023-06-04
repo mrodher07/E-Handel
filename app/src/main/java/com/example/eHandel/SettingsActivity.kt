@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import com.example.eHandel.databinding.ActivitySettingsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -100,8 +101,11 @@ class SettingsActivity : AppCompatActivity() {
                             if (currentUser != null) {
                                 currentUser.updatePassword(binding.etSettingsPassword.text.toString())
                                     .addOnSuccessListener {
-                                        startActivity(Intent(this, HomeActivity::class.java))
+                                        auth = FirebaseAuth.getInstance()
+                                        auth.signOut()
+                                        startActivity(Intent(this, MainActivity::class.java))
                                         finish()
+                                        Toast.makeText(this, "Debes iniciar sesión de nuevo para que tus cambios se completen", Toast.LENGTH_SHORT).show()
                                     }
                                     .addOnFailureListener{ e -> println(e.message)}
                             }

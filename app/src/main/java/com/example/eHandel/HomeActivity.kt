@@ -58,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId){
                 R.id.nav_cart -> {
-
+                    startActivity(Intent(this, CartActivity::class.java))
                 }
                 R.id.nav_sellProduct -> {
 
@@ -125,7 +125,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 productList = mutableList.toList()
 
-                val adapter = ProductAdapter(productList)
+                val adapter = ProductAdapter(this, productList)
                 recyclerView.adapter = adapter
             }
     }

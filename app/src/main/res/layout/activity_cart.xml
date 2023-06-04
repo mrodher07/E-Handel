@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CartActivity">
+
+    <RelativeLayout
+        android:id="@+id/rlCartPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/secondaryColor"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/tvTotalPriceCart"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/tvTotalPriceCart"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProductInCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlCartPrice"
+        android:layout_above="@+id/buttonNextCart"
+        android:visibility="visible">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tvNoProductsInCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlCartPrice"
+        android:layout_above="@id/buttonNextCart"
+        android:text="@string/tvNoProductsInCart"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/buttonNextCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/secondaryColor"
+        android:text="@string/buttonNextCart"
+        android:textSize="15dp"
+        />
+
+
+</RelativeLayout>
