@@ -65,5 +65,8 @@
     <string name="tvTotalPriceCart">Precio Total:</string>
     <string name="buttonNextCart">Siguiente</string>
     <string name="tvNoProductsInCart">No hay ningún producto en el carrito</string>
+    <string name="etConfirmOrderName">Name...</string>
+    <string name="etConfirmAddress">Address...</string>
+    <string name="etConfirmCityName">City Name...</string>
 
 </resources>

@@ -137,39 +137,46 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                 imageRef.downloadUrl.addOnSuccessListener { uri ->
                     val firestoreDB = FirebaseFirestore.getInstance()
                     val db = Firebase.firestore
-                    val data = hashMapOf(
-                        "name" to name,
-                        "type" to tipo,
-                        "image" to uri.toString(),
-                        "vendor" to vendor,
-                        "price" to price,
-                        "quantity" to quantity,
-                    )
-                    firestoreDB.collection("products")
-                        .document(name)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val document = task.result
-                                if (document.exists()) {
-                                    Toast.makeText(
-                                        this,
-                                        "El producto creado ya existe",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    db.collection("products").document(name)
-                                        .set(data)
-                                        .addOnSuccessListener {
-                                            Log.d(
-                                                ContentValues.TAG,
-                                                "DocumentSnapshot successfully written!"
-                                            )
+                    var email = auth.currentUser?.email
+                    db.collection("user").document(email.toString()).get()
+                        .addOnSuccessListener { documentSnapshot ->
+                            val data = hashMapOf(
+                                "name" to name,
+                                "type" to tipo,
+                                "image" to uri.toString(),
+                                "vendor" to vendor,
+                                "price" to price,
+                                "quantity" to quantity,
+                                "country" to documentSnapshot.getString("country"),
+                            )
+                            firestoreDB.collection("products")
+                                .document(name)
+                                .get()
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val document = task.result
+                                        if (document.exists()) {
+                                            Toast.makeText(
+                                                this,
+                                                "El producto creado ya existe",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        } else {
+                                            db.collection("products").document(name)
+                                                .set(data)
+                                                .addOnSuccessListener {
+                                                    Log.d(
+                                                        ContentValues.TAG,
+                                                        "DocumentSnapshot successfully written!"
+                                                    )
+                                                }
+                                                .addOnFailureListener { e -> println(e.message) }
                                         }
-                                        .addOnFailureListener { e -> println(e.message) }
+                                    }
                                 }
-                            }
                         }
+
+
                 }
             }
         } else if (imageByteArray != null) {
@@ -177,43 +184,45 @@ class AdminAddNewProductActivity : AppCompatActivity() {
             val imageRef = storageRef.child("Image_${System.currentTimeMillis()}.jpg")
             imageRef.putBytes(imageByteArray!!).addOnSuccessListener {
                 imageRef.downloadUrl.addOnSuccessListener { uri ->
-                    println(uri.toString())
                     val firestoreDB = FirebaseFirestore.getInstance()
                     val db = Firebase.firestore
-
-                    val data = hashMapOf(
-                        "name" to name,
-                        "type" to tipo,
-                        "image" to uri.toString(),
-                        "vendor" to vendor,
-                        "price" to price,
-                        "quantity" to quantity,
-                    )
-
-                    firestoreDB.collection("products")
-                        .document(name)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val document = task.result
-                                if (document.exists()) {
-                                    Toast.makeText(
-                                        this,
-                                        "El producto creado ya existe",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    db.collection("products").document(name)
-                                        .set(data)
-                                        .addOnSuccessListener {
-                                            Log.d(
-                                                ContentValues.TAG,
-                                                "DocumentSnapshot successfully written!"
-                                            )
+                    var email = auth.currentUser?.email
+                    db.collection("user").document(email.toString()).get()
+                        .addOnSuccessListener { documentSnapshot ->
+                            val data = hashMapOf(
+                                "name" to name,
+                                "type" to tipo,
+                                "image" to uri.toString(),
+                                "vendor" to vendor,
+                                "price" to price,
+                                "quantity" to quantity,
+                                "country" to documentSnapshot.getString("country"),
+                            )
+                            firestoreDB.collection("products")
+                                .document(name)
+                                .get()
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val document = task.result
+                                        if (document.exists()) {
+                                            Toast.makeText(
+                                                this,
+                                                "El producto creado ya existe",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        } else {
+                                            db.collection("products").document(name)
+                                                .set(data)
+                                                .addOnSuccessListener {
+                                                    Log.d(
+                                                        ContentValues.TAG,
+                                                        "DocumentSnapshot successfully written!"
+                                                    )
+                                                }
+                                                .addOnFailureListener { e -> println(e.message) }
                                         }
-                                        .addOnFailureListener { e -> println(e.message) }
+                                    }
                                 }
-                            }
                         }
                 }
             }.addOnFailureListener {
@@ -224,40 +233,43 @@ class AdminAddNewProductActivity : AppCompatActivity() {
         }else if (imageUri == null && imageByteArray == null){
             val firestoreDB = FirebaseFirestore.getInstance()
             val db = Firebase.firestore
-
-            val data = hashMapOf(
-                "name" to name,
-                "type" to tipo,
-                "image" to "https://firebasestorage.googleapis.com/v0/b/e-handel-8838a.appspot.com/o/photos%2Fimagenotfound.png?alt=media&token=b98faff4-7c09-46ae-9632-dd46730870d3",
-                "vendor" to vendor,
-                "price" to price,
-                "quantity" to quantity,
-            )
-
-            firestoreDB.collection("products")
-                .document(name)
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val document = task.result
-                        if (document.exists()) {
-                            Toast.makeText(
-                                this,
-                                "El producto creado ya existe",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            db.collection("products").document(name)
-                                .set(data)
-                                .addOnSuccessListener {
-                                    Log.d(
-                                        ContentValues.TAG,
-                                        "DocumentSnapshot successfully written!"
-                                    )
+            var email = auth.currentUser?.email
+            db.collection("user").document(email.toString()).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    val data = hashMapOf(
+                        "name" to name,
+                        "type" to tipo,
+                        "image" to "https://firebasestorage.googleapis.com/v0/b/e-handel-8838a.appspot.com/o/photos%2Fimagenotfound.png?alt=media&token=b98faff4-7c09-46ae-9632-dd46730870d3",
+                        "vendor" to vendor,
+                        "price" to price,
+                        "quantity" to quantity,
+                        "country" to documentSnapshot.getString("country"),
+                    )
+                    firestoreDB.collection("products")
+                        .document(name)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val document = task.result
+                                if (document.exists()) {
+                                    Toast.makeText(
+                                        this,
+                                        "El producto creado ya existe",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    db.collection("products").document(name)
+                                        .set(data)
+                                        .addOnSuccessListener {
+                                            Log.d(
+                                                ContentValues.TAG,
+                                                "DocumentSnapshot successfully written!"
+                                            )
+                                        }
+                                        .addOnFailureListener { e -> println(e.message) }
                                 }
-                                .addOnFailureListener { e -> println(e.message) }
+                            }
                         }
-                    }
                 }
         }
     }

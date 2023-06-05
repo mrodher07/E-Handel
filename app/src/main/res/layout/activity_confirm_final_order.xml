@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmFinalOrderActivity"
+    android:background="@color/RedCake">
+
+    <TextView
+        android:id="@+id/tvConfirmFinalOrderShipmentDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Por favor, confirma tus datos de envio"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/etConfirmOrderName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvConfirmFinalOrderShipmentDetails"
+        android:padding="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="15dp"
+        android:background="#79000000"
+        android:hint="@string/etConfirmOrderName"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:inputType="text"
+        />
+
+    <EditText
+        android:id="@+id/etConfirmPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etConfirmOrderName"
+        android:padding="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="#79000000"
+        android:hint="@string/phone_number_hint_etSettingsPhoneNumber"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:inputType="phone"
+        />
+
+    <EditText
+        android:id="@+id/etConfirmAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etConfirmPhoneNumber"
+        android:padding="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="#79000000"
+        android:hint="@string/etConfirmAddress"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:inputType="textPostalAddress"
+        />
+
+    <EditText
+        android:id="@+id/etConfirmCityName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etConfirmAddress"
+        android:padding="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="#79000000"
+        android:hint="@string/etConfirmCityName"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:inputType="text"
+        />
+
+    <Button
+        android:id="@+id/btnConfirmOrder"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Confirmar pedido"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_below="@id/etConfirmCityName"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/secondaryColor"
+        />
+
+</RelativeLayout>

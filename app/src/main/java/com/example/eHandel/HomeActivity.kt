@@ -55,6 +55,10 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        binding.appBarHome.fab.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId){
                 R.id.nav_cart -> {

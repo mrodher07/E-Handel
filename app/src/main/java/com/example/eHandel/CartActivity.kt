@@ -1,5 +1,6 @@
 package com.example.eHandel
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -28,6 +29,15 @@ class CartActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         createRecyclerViewCart()
+
+        binding.toolbarSettingsClose.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
+
+        binding.buttonNextCart.setOnClickListener {
+            startActivity(Intent(this, ConfirmFinalOrderActivity::class.java))
+        }
     }
 
     fun createRecyclerViewCart(){
