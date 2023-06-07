@@ -69,5 +69,7 @@
     <string name="etConfirmAddress">Address...</string>
     <string name="etConfirmCityName">City Name...</string>
     <string name="tvNoOrders">No hay ordenes. ¡Compra ya!</string>
+    <string name="tvNoPermission">No tienes suficientes permisos para poder vender ningún producto</string>
+    <string name="etAddNewProductType">Tipo</string>
 
 </resources>

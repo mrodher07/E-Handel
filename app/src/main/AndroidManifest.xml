@@ -17,6 +17,13 @@
         android:theme="@style/Theme.EHandel"
         tools:targetApi="31">
         <activity
+            android:name=".UserAddNewProductActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".OrderProductDetails"
             android:exported="false">
             <meta-data

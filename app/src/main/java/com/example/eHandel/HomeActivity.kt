@@ -65,7 +65,7 @@ class HomeActivity : AppCompatActivity() {
                     startActivity(Intent(this, CartActivity::class.java))
                 }
                 R.id.nav_sellProduct -> {
-
+                    startActivity(Intent(this, UserAddNewProductActivity::class.java))
                 }
                 R.id.nav_orders -> {
                     startActivity(Intent(this, OrdersActivity::class.java))

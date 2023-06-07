@@ -1,4 +1,4 @@
-package com.example.eHandel.adminActivities
+package com.example.eHandel
 
 import android.app.Activity
 import android.content.ContentValues
@@ -10,60 +10,72 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.eHandel.R
-import com.example.eHandel.databinding.ActivityAdminAddNewProductBinding
+import com.example.eHandel.adminActivities.AdminAddNewProductActivity
+import com.example.eHandel.databinding.ActivityUserAddNewProductBinding
 import com.google.firebase.auth.FirebaseAuth
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 
-class AdminAddNewProductActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityAdminAddNewProductBinding
+class UserAddNewProductActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityUserAddNewProductBinding
     private lateinit var auth: FirebaseAuth
     val storage = FirebaseStorage.getInstance()
     val firestore = FirebaseFirestore.getInstance()
+    val db = Firebase.firestore
     private var tipo = "";
     private var imageUri: Uri? = null
     private var imageByteArray: ByteArray? = null
     var downloadUrl: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAdminAddNewProductBinding.inflate(layoutInflater)
+        binding = ActivityUserAddNewProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
-
-        recogerTipo()
+        comprobarSiEsVendedor()
 
         binding.ivNewProductPhoto.setOnClickListener {
             productImage()
         }
-        binding.btnAddNewProduct.setOnClickListener {
-            var name = binding.etAddNewProductName.text.toString().trim()
-            var vendor = binding.etAddNewProductVendor.text.toString().trim()
-            var price = binding.etAddNewProductPrice.text.toString().toDouble()
-            var quantity = binding.etAddNewProductQuantity.text.toString().toInt()
-            addNewProduct(name, vendor, price, quantity)
+
+        binding.toolbarSettingsClose.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
+
+        binding.btnAddNewProduct.setOnClickListener {
+            addNewProduct()
+        }
+    }
+
+    fun comprobarSiEsVendedor(){
+        var email = auth.currentUser?.email
+        val users = db.collection("user")
+        val loggedUser = users.document(email.toString())
+        loggedUser.get()
+            .addOnSuccessListener { document ->
+                if(document != null){
+                    if(document.getBoolean("isVendor") == true){
+                        binding.rlAddNewProduct.visibility = View.VISIBLE
+                        binding.rlNoPermission.visibility = View.GONE
+                    }else{
+                        binding.rlAddNewProduct.visibility = View.GONE
+                        binding.rlNoPermission.visibility = View.VISIBLE
+                    }
+                }
+            }
     }
 
     companion object {
         const val PICK_IMAGE_REQUEST_GALERIA=20
         const val PICK_IMAGE_REQUEST_CAMERA=21
-    }
-
-    private fun recogerTipo(){
-        val mibundle = intent.extras
-        tipo = mibundle?.getString("type").toString()
-        binding.tvAddNewProductType.text = binding.tvAddNewProductType.text.toString().trim() + tipo
-
     }
 
     private fun productImage(){
@@ -74,12 +86,16 @@ class AdminAddNewProductActivity : AppCompatActivity() {
             when{
                 options[item] == resources.getString(R.string.productImagePopupCamera)-> {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(intent, PICK_IMAGE_REQUEST_CAMERA)
+                    startActivityForResult(intent,
+                        AdminAddNewProductActivity.PICK_IMAGE_REQUEST_CAMERA
+                    )
                 }
                 options[item] == resources.getString(R.string.productImagePopupGallery)-> {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
-                    startActivityForResult(intent, PICK_IMAGE_REQUEST_GALERIA)
+                    startActivityForResult(intent,
+                        AdminAddNewProductActivity.PICK_IMAGE_REQUEST_GALERIA
+                    )
                 }
             }
         }
@@ -88,12 +104,12 @@ class AdminAddNewProductActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == PICK_IMAGE_REQUEST_GALERIA && resultCode == Activity.RESULT_OK){
+        if(requestCode == AdminAddNewProductActivity.PICK_IMAGE_REQUEST_GALERIA && resultCode == Activity.RESULT_OK){
             imageUri = data?.data
             imageByteArray = null
             binding.ivNewProductPhoto.setImageURI(imageUri)
             binding.ivNewProductPhoto.setTag(imageUri)
-        } else if(requestCode == PICK_IMAGE_REQUEST_CAMERA && resultCode == Activity.RESULT_OK) {
+        } else if(requestCode == AdminAddNewProductActivity.PICK_IMAGE_REQUEST_CAMERA && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             imageUri = null
             imageByteArray = changeBitmap(applicationContext, imageBitmap)
@@ -115,7 +131,7 @@ class AdminAddNewProductActivity : AppCompatActivity() {
             e.printStackTrace()
         }finally {
             try {
-               byteArrayOutputStream?.close()
+                byteArrayOutputStream?.close()
             }catch (e: IOException){
                 e.printStackTrace()
             }
@@ -123,8 +139,8 @@ class AdminAddNewProductActivity : AppCompatActivity() {
         return byteArray
     }
 
-    private fun addNewProduct(name: String, vendor: String, price: Double, quantity: Number) {
-        if (imageUri != null) {
+    private fun addNewProduct(){
+        if (imageUri != null){
             val storageRef = storage.reference.child("photos")
             val imageRef = storageRef.child("Image_${System.currentTimeMillis()}.jpg")
             imageRef.putFile(imageUri!!).addOnSuccessListener {
@@ -135,16 +151,16 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                     db.collection("user").document(email.toString()).get()
                         .addOnSuccessListener { documentSnapshot ->
                             val data = hashMapOf(
-                                "name" to name,
-                                "type" to tipo,
+                                "name" to binding.etAddNewProductName.text.toString(),
+                                "type" to binding.etAddNewProductType.text.toString(),
                                 "image" to uri.toString(),
-                                "vendor" to vendor,
-                                "price" to price,
-                                "quantity" to quantity,
+                                "vendor" to documentSnapshot.getString("username"),
+                                "price" to binding.etAddNewProductPrice.text.toString().toDouble(),
+                                "quantity" to binding.etAddNewProductQuantity.text.toString().toInt(),
                                 "country" to documentSnapshot.getString("country"),
                             )
                             firestoreDB.collection("products")
-                                .document(name)
+                                .document(binding.etAddNewProductName.text.toString())
                                 .get()
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
@@ -156,7 +172,7 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         } else {
-                                            db.collection("products").document(name)
+                                            db.collection("products").document(binding.etAddNewProductName.text.toString())
                                                 .set(data)
                                                 .addOnSuccessListener {
                                                     Log.d(
@@ -169,8 +185,6 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                                     }
                                 }
                         }
-
-
                 }
             }
         } else if (imageByteArray != null) {
@@ -184,16 +198,16 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                     db.collection("user").document(email.toString()).get()
                         .addOnSuccessListener { documentSnapshot ->
                             val data = hashMapOf(
-                                "name" to name,
-                                "type" to tipo,
+                                "name" to binding.etAddNewProductName.text.toString(),
+                                "type" to binding.etAddNewProductType.text.toString(),
                                 "image" to uri.toString(),
-                                "vendor" to vendor,
-                                "price" to price,
-                                "quantity" to quantity,
+                                "vendor" to documentSnapshot.getString("username"),
+                                "price" to binding.etAddNewProductPrice.text.toString().toDouble(),
+                                "quantity" to binding.etAddNewProductQuantity.text.toString().toInt(),
                                 "country" to documentSnapshot.getString("country"),
                             )
                             firestoreDB.collection("products")
-                                .document(name)
+                                .document(binding.etAddNewProductName.text.toString())
                                 .get()
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
@@ -205,7 +219,7 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         } else {
-                                            db.collection("products").document(name)
+                                            db.collection("products").document(binding.etAddNewProductName.text.toString())
                                                 .set(data)
                                                 .addOnSuccessListener {
                                                     Log.d(
@@ -224,23 +238,23 @@ class AdminAddNewProductActivity : AppCompatActivity() {
             }.addOnCanceledListener {
                 println("Se ha cancelado")
             }
-        }else if (imageUri == null && imageByteArray == null){
+        } else if (imageUri == null && imageByteArray == null){
             val firestoreDB = FirebaseFirestore.getInstance()
             val db = Firebase.firestore
             var email = auth.currentUser?.email
             db.collection("user").document(email.toString()).get()
                 .addOnSuccessListener { documentSnapshot ->
                     val data = hashMapOf(
-                        "name" to name,
-                        "type" to tipo,
+                        "name" to binding.etAddNewProductName.text.toString(),
+                        "type" to binding.etAddNewProductType.text.toString(),
                         "image" to "https://firebasestorage.googleapis.com/v0/b/e-handel-8838a.appspot.com/o/photos%2Fimagenotfound.png?alt=media&token=b98faff4-7c09-46ae-9632-dd46730870d3",
-                        "vendor" to vendor,
-                        "price" to price,
-                        "quantity" to quantity,
+                        "vendor" to documentSnapshot.getString("username"),
+                        "price" to binding.etAddNewProductPrice.text.toString().toDouble(),
+                        "quantity" to binding.etAddNewProductQuantity.text.toString().toInt(),
                         "country" to documentSnapshot.getString("country"),
                     )
                     firestoreDB.collection("products")
-                        .document(name)
+                        .document(binding.etAddNewProductName.text.toString())
                         .get()
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
@@ -252,7 +266,7 @@ class AdminAddNewProductActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 } else {
-                                    db.collection("products").document(name)
+                                    db.collection("products").document(binding.etAddNewProductName.text.toString())
                                         .set(data)
                                         .addOnSuccessListener {
                                             Log.d(
