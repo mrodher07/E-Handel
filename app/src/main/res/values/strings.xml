@@ -68,5 +68,6 @@
     <string name="etConfirmOrderName">Name...</string>
     <string name="etConfirmAddress">Address...</string>
     <string name="etConfirmCityName">City Name...</string>
+    <string name="tvNoOrders">No hay ordenes. ¡Compra ya!</string>
 
 </resources>

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.eHandel.Models.Productos
 import com.example.eHandel.R
 import com.example.eHandel.ViewHolder.ProductCartViewHolder
-import com.example.eHandel.ViewHolder.ProductViewHolder
 
 class ProductCartAdapter(private val context: Context, private val productList: List<Productos>): RecyclerView.Adapter<ProductCartViewHolder>() {
 

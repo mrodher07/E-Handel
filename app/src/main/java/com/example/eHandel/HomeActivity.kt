@@ -68,7 +68,7 @@ class HomeActivity : AppCompatActivity() {
 
                 }
                 R.id.nav_orders -> {
-
+                    startActivity(Intent(this, OrdersActivity::class.java))
                 }
                 R.id.nav_settings -> {
                     startActivity(Intent(this, SettingsActivity::class.java))
