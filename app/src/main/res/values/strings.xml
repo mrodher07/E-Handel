@@ -39,7 +39,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -71,5 +70,8 @@
     <string name="tvNoOrders">No hay ordenes. ¡Compra ya!</string>
     <string name="tvNoPermission">No tienes suficientes permisos para poder vender ningún producto</string>
     <string name="etAddNewProductType">Tipo</string>
-
+    <string name="tituloAcercaDe">Info</string>
+    <string name="contenidoAcercaDe">Hecho por: Miguel Rodriguez Hernández y Domenik Jendryewski</string>
+    <string name="tituloAppInfo">Información sobre la aplicacion</string>
+    <string name="contenidoAppInfo">Esta aplicación consiste en una tienda online de exportación e importación de productos extranjeros, aquí se podrán encontrar produtos de todo tipo y el mismo usuario podrá vender sus productos. Simplifica tus transacciones internacionales y expande tu negocio a nivel global.</string>
 </resources>

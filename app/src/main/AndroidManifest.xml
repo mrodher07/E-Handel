@@ -17,6 +17,20 @@
         android:theme="@style/Theme.EHandel"
         tools:targetApi="31">
         <activity
+            android:name=".AppInfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".info.InfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UserAddNewProductActivity"
             android:exported="false">
             <meta-data

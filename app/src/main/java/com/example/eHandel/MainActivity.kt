@@ -1,13 +1,19 @@
 package com.example.eHandel
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.eHandel.adminActivities.AdminActivity
 import com.example.eHandel.adminActivities.AdminAddNewProductActivity
 import com.example.eHandel.databinding.ActivityMainBinding
+import com.example.eHandel.info.exampleBottomSheet
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -47,6 +53,42 @@ class MainActivity : AppCompatActivity() {
             binding.loginButton.text = getString(R.string.loginButtonText)
             dbName = "user"
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menubar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.menuApp->{
+                val bottomSheet = exampleBottomSheet(R.layout.activity_app_info)
+                bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+            }
+
+            R.id.menuAcercaDe->{
+                val bottomSheet = exampleBottomSheet(R.layout.activity_info)
+                bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val menuItem1 = menu?.findItem(R.id.menuAcercaDe)
+        if (menuItem1 != null) {
+            menuItem1.icon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN)
+        }
+        val menuItem2 = menu?.findItem(R.id.menuApp)
+        if (menuItem2 != null) {
+            menuItem2.icon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN)
+        }
+
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onStart() {
